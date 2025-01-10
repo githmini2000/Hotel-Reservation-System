@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Hotels.css';
 import imgHotel1 from "../assets/imgHotel1.png";
 import imgHotel2 from "../assets/imgHotel2.png";
+import imgHotel3 from "../assets/imgHotel3.png";
 
 const Hotels = () => {
   const [filters, setFilters] = useState({
@@ -45,7 +46,6 @@ const Hotels = () => {
 
   return (
     <div className="hotels-container">
-     
       {/* Search Bar */}
       <div className="search-bar">
         <input
@@ -76,7 +76,6 @@ const Hotels = () => {
       <div className="filter-container">
         <div className="filters">
           <h3>Filters</h3>
-
           <div className="filter-group">
             <label>Price Range</label>
             <input
@@ -89,7 +88,6 @@ const Hotels = () => {
             />
             <span>{`$${filters.priceRange}`}</span>
           </div>
-
           <div className="filter-group">
             <label>Meal Availability</label>
             <label>
@@ -167,42 +165,74 @@ const Hotels = () => {
         <div className="hotel-cards">
           {/* Hotel Box 1 */}
           <div className="hotel-card">
-            <img src={imgHotel1} alt="Hotel 1" className="hotel-image" />
-            <div className="hotel-info">
-              <div className="tabs">
-                <button>Overview</button>
-                <button>Facilities</button>
-                <button>Reviews</button>
-                <button>Rules</button>
+            <div className="hotel-card-content">
+              <div className="hotel-image">
+                <img src={imgHotel1} alt="Hotel 1" />
               </div>
-              <div className="description">
-                <p><strong>Overview:</strong> A luxurious hotel offering spacious rooms and top-notch services. Located in the heart of the city, perfect for both business and leisure stays.</p>
-                <p><strong>Facilities:</strong> Balcony, Swimming Pool, Free Wi-Fi, Fitness Center.</p>
-                <p><strong>Reviews:</strong> Very Good - Rated 4.5/5 by 200 guests.</p>
-                <p><strong>Rules:</strong> No pets, No smoking in rooms.</p>
+              <div className="hotel-details">
+                <div className="tabs">
+                  <button>Overview</button>
+                  <button>Facilities</button>
+                  <button>Reviews</button>
+                  <button>Rules</button>
+                </div>
+                <div className="description">
+                  <p><strong>Overview:</strong> A luxurious hotel offering spacious rooms and top-notch services. Located in the heart of the city, perfect for both business and leisure stays.</p>
+                  <p><strong>Facilities:</strong> Balcony, Swimming Pool, Free Wi-Fi, Fitness Center.</p>
+                  <p><strong>Reviews:</strong> Very Good - Rated 4.5/5 by 200 guests.</p>
+                  <p><strong>Rules:</strong> No pets, No smoking in rooms.</p>
+                </div>
+                <button className="book-now">Book Now</button>
               </div>
             </div>
-            <button className="book-now">Book Now</button>
           </div>
 
           {/* Hotel Box 2 */}
           <div className="hotel-card">
-            <img src={imgHotel2} alt="Hotel 2" className="hotel-image" />
-            <div className="hotel-info">
-              <div className="tabs">
-                <button>Overview</button>
-                <button>Facilities</button>
-                <button>Reviews</button>
-                <button>Rules</button>
+            <div className="hotel-card-content">
+              <div className="hotel-image">
+                <img src={imgHotel2} alt="Hotel 2" />
               </div>
-              <div className="description">
-                <p><strong>Overview:</strong> This charming boutique hotel is perfect for those seeking a quiet and relaxing experience, with stunning views and personalized service.</p>
-                <p><strong>Facilities:</strong> Balcony, Swimming Pool, Room Service, Spa.</p>
-                <p><strong>Reviews:</strong> Good - Rated 4/5 by 150 guests.</p>
-                <p><strong>Rules:</strong> No pets, Quiet hours from 10 PM to 7 AM.</p>
+              <div className="hotel-details">
+                <div className="tabs">
+                  <button>Overview</button>
+                  <button>Facilities</button>
+                  <button>Reviews</button>
+                  <button>Rules</button>
+                </div>
+                <div className="description">
+                  <p><strong>Overview:</strong> A cozy hotel with a homely atmosphere and excellent customer service. Conveniently located near shopping centers.</p>
+                  <p><strong>Facilities:</strong> Balcony, Free Wi-Fi, Bar.</p>
+                  <p><strong>Reviews:</strong> Good - Rated 4.2/5 by 150 guests.</p>
+                  <p><strong>Rules:</strong> No pets allowed.</p>
+                </div>
+                <button className="book-now">Book Now</button>
               </div>
             </div>
-            <button className="book-now">Book Now</button>
+          </div>
+
+          {/* Hotel Box 3 */}
+          <div className="hotel-card">
+            <div className="hotel-card-content">
+              <div className="hotel-image">
+                <img src={imgHotel3} alt="Hotel 3" />
+              </div>
+              <div className="hotel-details">
+                <div className="tabs">
+                  <button>Overview</button>
+                  <button>Facilities</button>
+                  <button>Reviews</button>
+                  <button>Rules</button>
+                </div>
+                <div className="description">
+                  <p><strong>Overview:</strong> A modern hotel with excellent amenities for business travelers and tourists.</p>
+                  <p><strong>Facilities:</strong> Swimming Pool, Fitness Center, Bar.</p>
+                  <p><strong>Reviews:</strong> Excellent - Rated 5/5 by 300 guests.</p>
+                  <p><strong>Rules:</strong> No smoking inside rooms.</p>
+                </div>
+                <button className="book-now">Book Now</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
