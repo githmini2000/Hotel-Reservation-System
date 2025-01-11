@@ -25,6 +25,8 @@ function App() {
           <Route path="/login" element={<Login />} /> 
           <Route path="/booking" element={<BookingForm />} />
           <Route path="/contact" element={<ContactUs />} />
+          
+
         </Routes>
 
         <Footer />

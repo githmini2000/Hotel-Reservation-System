@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Hotels.css";
 import imgHotel1 from "../assets/imgHotel1.png";
 import imgHotel2 from "../assets/imgHotel2.png";
@@ -18,210 +19,163 @@ const Hotels = () => {
     location: "",
   });
 
-  const handleFilterChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    if (type === "checkbox") {
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        [name]: {
-          ...prevFilters[name],
-          [value]: checked,
-        },
-      }));
-    } else if (type === "range") {
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        [name]: value,
-      }));
-    }
-  };
+  const [selectedHotel, setSelectedHotel] = useState(null);
+  const [showBookingForm, setShowBookingForm] = useState(false);
 
-  const handleSearchChange = (e) => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+  });
+
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
+
+  // 1. Handle form input changes
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setSearch((prevSearch) => ({
-      ...prevSearch,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
     }));
   };
 
+  // 2. Handle booking submission and confirmation dialog
+  const handleBookingSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission
+
+    // Ask the user for confirmation using a confirmation dialog
+    const isConfirmed = window.confirm(`Are you sure you want to confirm the booking for ${selectedHotel.name}?`);
+
+    if (isConfirmed) {
+      // If confirmed, show a success message
+      alert(`Booking confirmed for ${selectedHotel.name}!`);
+
+      // Optionally, save the booking (e.g., in localStorage or a backend)
+      saveBooking(selectedHotel, formData);
+
+      // Hide the booking form and navigate (optional)
+      setShowBookingForm(false);
+      navigate("/thank-you"); // This is just an example; you can customize the page
+    } else {
+      // If canceled, show a cancellation message
+      alert(`Booking for ${selectedHotel.name} has been canceled.`);
+      setShowBookingForm(false); // Hide the form
+    }
+  };
+
+  // Function to save the booking (in localStorage for simplicity)
+  const saveBooking = (hotel, formData) => {
+    const bookingDetails = {
+      hotel,
+      ...formData,
+      bookingDate: new Date().toLocaleString(),
+    };
+    localStorage.setItem("booking", JSON.stringify(bookingDetails));
+    console.log("Booking saved:", bookingDetails);
+  };
+
+  // 3. Handle the Book Now button click to show the booking form
+  const handleBookNow = (hotel) => {
+    setSelectedHotel(hotel);
+    setShowBookingForm(true);
+  };
+
+  // 4. Hotels data and filtering (existing code)
   const hotels = [
     {
       id: 1,
-      name: "Luxurious Downtown Hotel",
-      description:
-        "Located in the heart of Sri Lanka, the Luxurious Downtown Hotel offers modern, elegantly designed rooms with stunning views of the skyline.The hotel is ideally situated near shopping, dining, and popular tourist attractions.",
-      facilities: "Free WiFi, Balcony, Pool Access",
-      rules: "No pets allowed, No smoking",
-      price: "$200 per night",
-      stars: 4.5,
-      offers: "20% off for bookings this week!",
-      img: imgHotel1,
+      name: "Hotel Paradise",
+      description: "A beautiful beachfront hotel.",
+      price: 250,
+      image: imgHotel1,
     },
     {
       id: 2,
-      name: "Cozy Shopping Hub Hotel",
-      description:
-        "Nestled in the lively city Galle, the Cozy Shopping Hub Hotel is the perfect destination for those who love shopping. The hotel offers comfortable, spacious rooms with easy access to local boutiques, restaurants, and entertainment venues. located near top shopping destinations and attractions.",
-      facilities: "Free Breakfast, Gym Access",
-      rules: "No loud music after 10 PM",
-      price: "$150 per night",
-      stars: 4.2,
-      offers: "Limited rooms available!",
-      img: imgHotel2,
+      name: "Mountain Retreat",
+      description: "A tranquil escape in the mountains.",
+      price: 350,
+      image: imgHotel2,
     },
     {
       id: 3,
-      name: "Modern Tourist Stay",
-      description: "The Modern Tourist Stay in Miami Beach offers contemporary accommodations with breathtaking ocean views. Guests can unwind by the outdoor pool, enjoy fitness facilities, or explore the vibrant nightlife of Miami. The hotel provides spacious rooms equipped with all the necessary amenities for a relaxing vacation. for tourists, offering modern rooms with ocean views.",
-      facilities: "Free Parking, Swimming Pool",
-      rules: "Check-in after 2 PM, Check-out by 11 AM",
-      price: "$180 per night",
-      stars: 5.0,
-      offers: "Early bird discounts available!",
-      img: imgHotel3,
+      name: "City Heights",
+      description: "Modern hotel in the heart of the city.",
+      price: 200,
+      image: imgHotel3,
     },
   ];
 
+  const filteredHotels = hotels.filter((hotel) => {
+    return hotel.price >= filters.priceRange[0] && hotel.price <= filters.priceRange[1];
+  });
+
   return (
     <div className="hotels-container">
-      {/* Search Bar */}
-      <div className="search-bar">
+      <h1>Find Your Perfect Hotel</h1>
+
+      {/* Search Form */}
+      <div className="search-form">
+        <input
+          type="text"
+          name="location"
+          placeholder="Enter location"
+          value={search.location}
+          onChange={(e) => setSearch({ ...search, location: e.target.value })}
+        />
         <input
           type="date"
           name="checkinDate"
           value={search.checkinDate}
-          onChange={handleSearchChange}
-          placeholder="Check-in Date"
+          onChange={(e) => setSearch({ ...search, checkinDate: e.target.value })}
         />
         <input
           type="date"
           name="checkoutDate"
           value={search.checkoutDate}
-          onChange={handleSearchChange}
-          placeholder="Check-out Date"
+          onChange={(e) => setSearch({ ...search, checkoutDate: e.target.value })}
         />
-        <input
-          type="text"
-          name="location"
-          value={search.location}
-          onChange={handleSearchChange}
-          placeholder="Enter Location"
-        />
-        <button>Search</button>
       </div>
 
-      {/* Filter Section */}
-      <div className="filter-container">
-        <div className="filters">
-          <h3>Filters:</h3>
-          <div className="filter-group">
-            <label>Price Range</label>
+      {/* Display Hotels */}
+      <div className="hotels-list">
+        {filteredHotels.map((hotel) => (
+          <div key={hotel.id} className="hotel-card">
+            <img src={hotel.image} alt={hotel.name} />
+            <h3>{hotel.name}</h3>
+            <p>{hotel.description}</p>
+            <p>Price: ${hotel.price}</p>
+            <button onClick={() => handleBookNow(hotel)}>Book Now</button>
+          </div>
+        ))}
+      </div>
+
+      {/* Booking Form */}
+      {showBookingForm && selectedHotel && (
+        <div className="booking-form">
+          <h2>Book your stay at {selectedHotel.name}</h2>
+          <form onSubmit={handleBookingSubmit}>
             <input
-              type="range"
-              name="priceRange"
-              min="0"
-              max="1000"
-              value={filters.priceRange}
-              onChange={handleFilterChange}
+              type="text"
+              name="fullName"
+              placeholder="Full Name"
+              value={formData.fullName}
+              onChange={handleInputChange}
+              required
             />
-            <span>{`$${filters.priceRange}`}</span>
-          </div>
-          <div className="filter-group">
-            <label>Meal Availability</label>
-            <label>
-              <input
-                type="checkbox"
-                name="mealAvailability"
-                value="breakfast"
-                checked={filters.mealAvailability.breakfast}
-                onChange={handleFilterChange}
-              />
-              Breakfast
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="mealAvailability"
-                value="lunch"
-                checked={filters.mealAvailability.lunch}
-                onChange={handleFilterChange}
-              />
-              Lunch
-            </label>
-          </div>
-
-          <div className="filter-group">
-            <label>Facilities</label>
-            <label>
-              <input
-                type="checkbox"
-                name="facilities"
-                value="balcony"
-                checked={filters.facilities.balcony}
-                onChange={handleFilterChange}
-              />
-              Balcony
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="facilities"
-                value="swimmingPool"
-                checked={filters.facilities.swimmingPool}
-                onChange={handleFilterChange}
-              />
-              Swimming Pool
-            </label>
-          </div>
-
-          <div className="filter-group">
-            <label>Reviews</label>
-            <label>
-              <input
-                type="checkbox"
-                name="reviews"
-                value="good"
-                checked={filters.reviews.good}
-                onChange={handleFilterChange}
-              />
-              Good
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="reviews"
-                value="veryGood"
-                checked={filters.reviews.veryGood}
-                onChange={handleFilterChange}
-              />
-              Very Good
-            </label>
-          </div>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+            />
+            <button type="submit">Confirm Booking</button>
+            <button type="button" onClick={() => setShowBookingForm(false)}>
+              Cancel
+            </button>
+          </form>
         </div>
-
-        {/* Hotel Details Section */}
-        <div className="hotel-cards">
-          {hotels.map((hotel) => (
-            <div className="hotel-card" key={hotel.id}>
-              <div className="hotel-card-content">
-                <div className="hotel-image">
-                  <img src={hotel.img} alt={hotel.name} />
-                </div>
-                <div className="hotel-details">
-                  <h3>{hotel.name}</h3>
-                  <p className="description">{hotel.description}</p>
-                  <p className="facilities">Facilities: {hotel.facilities}</p>
-                  <p>Rules: {hotel.rules}</p>
-                  <p className="offers">{hotel.offers}</p>
-                  <p className="price">Price: {hotel.price}</p>
-                  <span className="rating">{hotel.stars} ★</span>
-                  <button className="book-now">Book Now</button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      )}
     </div>
   );
 };
