@@ -12,6 +12,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 20px;
+ 
 }
 
 .search-bar {
@@ -29,31 +30,33 @@ body {
 
 .search-bar input {
   padding: 15px;
-  font-size: 18px; /* Increased font size */
-  border: 1px solid #ccc;
+  font-size: 18px;
+  border: 1px solid #686565;
   border-radius: 5px;
-  text-align: center; /* Centered text inside the input fields */
+  text-align: center;
 }
 
 .search-bar button {
   padding: 12px 20px;
-  background-color: #3498db;
+  background-color: #05609d;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 18px; /* Increased font size */
+  font-size: 18px;
 }
 
 .filter-container {
   display: flex;
   gap: 20px;
+  height: 500px
+ 
 }
 
 .filters {
   width: 250px;
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: #d2d5d8;
   border-radius: 10px;
 }
 
@@ -84,11 +87,12 @@ body {
 
 .hotel-card {
   width: 100%;
-  background-color: #ffffff;
+  background-color: #d3e1f3;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
+ 
 }
 
 .hotel-card-content {
@@ -97,7 +101,7 @@ body {
 }
 
 .hotel-image {
-  width: 25%; /* Image takes up 1/4 of the box */
+  width: 25%;
   flex-shrink: 0;
 }
 
@@ -109,22 +113,52 @@ body {
 }
 
 .hotel-details {
-  width: 75%; /* Details take up the remaining 3/4 */
+  width: 75%;
 }
 
-.tabs button {
-  margin-right: 10px;
-  padding: 5px 15px;
-  background-color: #ecf0f1;
-  border: none;
-  cursor: pointer;
+.hotel-details h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #022a52; /* Dark Blue */
 }
 
-.description p {
-  margin-top: 10px;
-  font-size: 14px;
-  display: inline-block;
-  margin-right: 10px; /* Add some space between descriptions */
+.description {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #262525; /* Gray or Black */
+}
+
+.facilities {
+  font-size: 16px;
+  color: #0c7822; /* Green */
+  margin: 5px 0;
+}
+
+.rules {
+  font-size: 16px;
+  color: #000000; /* Black */
+  margin: 5px 0;
+}
+
+.offers {
+  font-size: 16px;
+  color: #ac1606  !important; /* Red */
+  margin: 5px 0;
+}
+
+.price {
+  font-size: 17px;
+  color: #101eb6; /* Black */
+  margin: 10px 0;
+
+}
+
+.rating {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #f1c40f; /* Yellow */
+  font-size: 18px;
 }
 
 .book-now {
@@ -134,4 +168,46 @@ body {
   border: none;
   cursor: pointer;
   margin-top: 20px;
+  border-radius: 5px;
+}
+
+.book-now:hover {
+  background-color: #27ae60;
+}
+
+/* Filters */
+.filters h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #2c3e50;
+}
+
+.filters .filter-group label {
+  font-size: 14px;
+  color: #34495e;
+}
+
+.filters .filter-group input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Filter Options */
+.filters h3:nth-of-type(1)::before {
+  content: "Price Range";
+  display: block;
+}
+
+.filters h3:nth-of-type(2)::before {
+  content: "Meal Availability";
+  display: block;
+}
+
+.filters h3:nth-of-type(3)::before {
+  content: "Facilities";
+  display: block;
+}
+
+.filters h3:nth-of-type(4)::before {
+  content: "Reviews";
+  display: block;
 }

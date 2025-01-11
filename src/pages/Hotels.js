@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './Hotels.css';
+import React, { useState } from "react";
+import "./Hotels.css";
 import imgHotel1 from "../assets/imgHotel1.png";
 import imgHotel2 from "../assets/imgHotel2.png";
 import imgHotel3 from "../assets/imgHotel3.png";
@@ -13,22 +13,22 @@ const Hotels = () => {
   });
 
   const [search, setSearch] = useState({
-    checkinDate: '',
-    checkoutDate: '',
-    location: '',
+    checkinDate: "",
+    checkoutDate: "",
+    location: "",
   });
 
   const handleFilterChange = (e) => {
     const { name, value, type, checked } = e.target;
-    if (type === 'checkbox') {
-      setFilters((prevFilters) => {
-        const updatedFilters = { ...prevFilters };
-        if (name.includes('mealAvailability') || name.includes('facilities') || name.includes('reviews')) {
-          updatedFilters[name][value] = checked;
-        }
-        return updatedFilters;
-      });
-    } else if (type === 'range') {
+    if (type === "checkbox") {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [name]: {
+          ...prevFilters[name],
+          [value]: checked,
+        },
+      }));
+    } else if (type === "range") {
       setFilters((prevFilters) => ({
         ...prevFilters,
         [name]: value,
@@ -43,6 +43,44 @@ const Hotels = () => {
       [name]: value,
     }));
   };
+
+  const hotels = [
+    {
+      id: 1,
+      name: "Luxurious Downtown Hotel",
+      description:
+        "Located in the heart of New York City, the Luxurious Downtown Hotel offers modern, elegantly designed rooms with stunning views of the skyline.The hotel is ideally situated near shopping, dining, and popular tourist attractions.",
+      facilities: "Free WiFi, Balcony, Pool Access",
+      rules: "No pets allowed, No smoking",
+      price: "$200 per night",
+      stars: 4.5,
+      offers: "20% off for bookings this week!",
+      img: imgHotel1,
+    },
+    {
+      id: 2,
+      name: "Cozy Shopping Hub Hotel",
+      description:
+        "Nestled in the lively city of San Francisco, the Cozy Shopping Hub Hotel is the perfect destination for those who love shopping. The hotel offers comfortable, spacious rooms with easy access to local boutiques, restaurants, and entertainment venues. located near top shopping destinations and attractions.",
+      facilities: "Free Breakfast, Gym Access",
+      rules: "No loud music after 10 PM",
+      price: "$150 per night",
+      stars: 4.2,
+      offers: "Limited rooms available!",
+      img: imgHotel2,
+    },
+    {
+      id: 3,
+      name: "Modern Tourist Stay",
+      description: "The Modern Tourist Stay in Miami Beach offers contemporary accommodations with breathtaking ocean views. Guests can unwind by the outdoor pool, enjoy fitness facilities, or explore the vibrant nightlife of Miami. The hotel provides spacious rooms equipped with all the necessary amenities for a relaxing vacation. for tourists, offering modern rooms with ocean views.",
+      facilities: "Free Parking, Swimming Pool",
+      rules: "Check-in after 2 PM, Check-out by 11 AM",
+      price: "$180 per night",
+      stars: 5.0,
+      offers: "Early bird discounts available!",
+      img: imgHotel3,
+    },
+  ];
 
   return (
     <div className="hotels-container">
@@ -75,7 +113,7 @@ const Hotels = () => {
       {/* Filter Section */}
       <div className="filter-container">
         <div className="filters">
-          <h3>Filters</h3>
+          <h3>Filters:</h3>
           <div className="filter-group">
             <label>Price Range</label>
             <input
@@ -163,77 +201,25 @@ const Hotels = () => {
 
         {/* Hotel Details Section */}
         <div className="hotel-cards">
-          {/* Hotel Box 1 */}
-          <div className="hotel-card">
-            <div className="hotel-card-content">
-              <div className="hotel-image">
-                <img src={imgHotel1} alt="Hotel 1" />
-              </div>
-              <div className="hotel-details">
-                <div className="tabs">
-                  <button>Overview</button>
-                  <button>Facilities</button>
-                  <button>Reviews</button>
-                  <button>Rules</button>
+          {hotels.map((hotel) => (
+            <div className="hotel-card" key={hotel.id}>
+              <div className="hotel-card-content">
+                <div className="hotel-image">
+                  <img src={hotel.img} alt={hotel.name} />
                 </div>
-                <div className="description">
-                  <p><strong>Overview:</strong> A luxurious hotel offering spacious rooms and top-notch services. Located in the heart of the city, perfect for both business and leisure stays.</p>
-                  <p><strong>Facilities:</strong> Balcony, Swimming Pool, Free Wi-Fi, Fitness Center.</p>
-                  <p><strong>Reviews:</strong> Very Good - Rated 4.5/5 by 200 guests.</p>
-                  <p><strong>Rules:</strong> No pets, No smoking in rooms.</p>
+                <div className="hotel-details">
+                  <h3>{hotel.name}</h3>
+                  <p className="description">{hotel.description}</p>
+                  <p className="facilities">Facilities: {hotel.facilities}</p>
+                  <p>Rules: {hotel.rules}</p>
+                  <p className="offers">{hotel.offers}</p>
+                  <p className="price">Price: {hotel.price}</p>
+                  <span className="rating">{hotel.stars} ★</span>
+                  <button className="book-now">Book Now</button>
                 </div>
-                <button className="book-now">Book Now</button>
               </div>
             </div>
-          </div>
-
-          {/* Hotel Box 2 */}
-          <div className="hotel-card">
-            <div className="hotel-card-content">
-              <div className="hotel-image">
-                <img src={imgHotel2} alt="Hotel 2" />
-              </div>
-              <div className="hotel-details">
-                <div className="tabs">
-                  <button>Overview</button>
-                  <button>Facilities</button>
-                  <button>Reviews</button>
-                  <button>Rules</button>
-                </div>
-                <div className="description">
-                  <p><strong>Overview:</strong> A cozy hotel with a homely atmosphere and excellent customer service. Conveniently located near shopping centers.</p>
-                  <p><strong>Facilities:</strong> Balcony, Free Wi-Fi, Bar.</p>
-                  <p><strong>Reviews:</strong> Good - Rated 4.2/5 by 150 guests.</p>
-                  <p><strong>Rules:</strong> No pets allowed.</p>
-                </div>
-                <button className="book-now">Book Now</button>
-              </div>
-            </div>
-          </div>
-
-          {/* Hotel Box 3 */}
-          <div className="hotel-card">
-            <div className="hotel-card-content">
-              <div className="hotel-image">
-                <img src={imgHotel3} alt="Hotel 3" />
-              </div>
-              <div className="hotel-details">
-                <div className="tabs">
-                  <button>Overview</button>
-                  <button>Facilities</button>
-                  <button>Reviews</button>
-                  <button>Rules</button>
-                </div>
-                <div className="description">
-                  <p><strong>Overview:</strong> A modern hotel with excellent amenities for business travelers and tourists.</p>
-                  <p><strong>Facilities:</strong> Swimming Pool, Fitness Center, Bar.</p>
-                  <p><strong>Reviews:</strong> Excellent - Rated 5/5 by 300 guests.</p>
-                  <p><strong>Rules:</strong> No smoking inside rooms.</p>
-                </div>
-                <button className="book-now">Book Now</button>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
