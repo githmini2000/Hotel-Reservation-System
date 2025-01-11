@@ -73,3 +73,12 @@
 .right-column button.submit-btn:hover {
   background-color: #0056b3;
 }
+
+/* Success message styling */
+.booking-status {
+  margin-top: 20px;
+  color: green;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}

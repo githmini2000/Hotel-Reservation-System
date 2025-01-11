@@ -34,6 +34,7 @@
     margin-bottom: 5px;
     text-align: left;
     padding-left: 195px;
+
   }
   
   .contact-form input,
@@ -111,4 +112,10 @@
     display: block;
     height: 50px;
   }
-  
+  .success-message {
+    color: rgb(47, 111, 75);
+    font-weight: bold;
+    
+    margin-top: 20px;
+    
+  }

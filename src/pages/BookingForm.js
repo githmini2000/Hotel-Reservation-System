@@ -15,6 +15,8 @@ const BookingForm = () => {
     securityPin: '',
   });
 
+  const [bookingStatus, setBookingStatus] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -25,7 +27,17 @@ const BookingForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Booking details submitted:', formData);
+
+    // Show confirmation dialog to user
+    const confirmBooking = window.confirm('Are you sure you want to confirm the booking?');
+
+    if (confirmBooking) {
+      // If the user confirms the booking
+      setBookingStatus('Booking is successful! Thank you for your reservation.');
+    } else {
+      // If the user cancels the booking
+      setBookingStatus('Booking canceled.');
+    }
   };
 
   return (
@@ -174,6 +186,9 @@ const BookingForm = () => {
 
           <button type="submit" className="submit-btn">Submit Booking</button>
         </form>
+
+        {/* Show booking status message */}
+        {bookingStatus && <p className="booking-status">{bookingStatus}</p>}
       </div>
     </div>
   );

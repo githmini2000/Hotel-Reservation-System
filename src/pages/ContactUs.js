@@ -1,24 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ContactUs.css';
 
 const Contact = () => {
+  // State to track form submission status
+  const [messageSent, setMessageSent] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({
+      ...formData,
+      [id]: value,
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Simulate a successful form submission
+    setMessageSent(true);
+
+    // Optionally, clear the form after submission
+    setFormData({
+      name: '',
+      email: '',
+      message: '',
+    });
+
+    // Hide the success message after a few seconds
+    setTimeout(() => setMessageSent(false), 5000);
+  };
+
   return (
     <div className="contact-container">
       <h2>Contact Us</h2>
       <p>If you have any questions or messages, feel free to reach out to us.</p>
-      <form className="contact-form">
+
+      {messageSent && <p className="success-message">Your message has been sent successfully!</p>}
+
+      <form className="contact-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
-          <input type="text" id="name" placeholder="Enter your name" required />
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+          />
         </div>
+
         <div className="form-group">
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" placeholder="Enter your email" required />
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+          />
         </div>
+
         <div className="form-group">
           <label htmlFor="message">Message</label>
-          <textarea id="message" placeholder="Enter your message" rows="4" required></textarea>
+          <textarea
+            id="message"
+            placeholder="Enter your message"
+            rows="4"
+            value={formData.message}
+            onChange={handleInputChange}
+            required
+          ></textarea>
         </div>
+
         <button type="submit" className="submit-button">Send Message</button>
       </form>
 
