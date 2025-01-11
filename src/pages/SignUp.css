@@ -1,64 +1,75 @@
 /* SignUp.css */
 .auth-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #c2b4b4;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
   
-    
-  }
-  
-  .auth-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .auth-input {
-    margin-bottom: 15px;
-  }
-  
-  .auth-input label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .auth-input input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .auth-container button {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .auth-container button:hover {
-    background-color: #0056b3;
-  }
-  
-  .auth-container p {
-    text-align: center;
-    font-size: 14px;
-  }
-  
-  .auth-container a {
-    color: #007BFF;
-    text-decoration: none;
-  }
-  
-  .auth-container a:hover {
-    text-decoration: underline;
-  }
-  
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #c2b4b4;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-input {
+  margin-bottom: 15px;
+}
+
+.auth-input label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.auth-input input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.auth-container button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.auth-container button:hover {
+  background-color: #0056b3;
+}
+
+.auth-container p {
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-container a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.auth-container a:hover {
+  text-decoration: underline;
+}
+
+/* Add this to SignUp.css */
+.success-message {
+  background-color: #28a745; /* Green background */
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.success-message h3 {
+  margin: 0;
+}

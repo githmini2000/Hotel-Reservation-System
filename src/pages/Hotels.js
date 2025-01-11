@@ -49,7 +49,7 @@ const Hotels = () => {
       id: 1,
       name: "Luxurious Downtown Hotel",
       description:
-        "Located in the heart of New York City, the Luxurious Downtown Hotel offers modern, elegantly designed rooms with stunning views of the skyline.The hotel is ideally situated near shopping, dining, and popular tourist attractions.",
+        "Located in the heart of Sri Lanka, the Luxurious Downtown Hotel offers modern, elegantly designed rooms with stunning views of the skyline.The hotel is ideally situated near shopping, dining, and popular tourist attractions.",
       facilities: "Free WiFi, Balcony, Pool Access",
       rules: "No pets allowed, No smoking",
       price: "$200 per night",
@@ -61,7 +61,7 @@ const Hotels = () => {
       id: 2,
       name: "Cozy Shopping Hub Hotel",
       description:
-        "Nestled in the lively city of San Francisco, the Cozy Shopping Hub Hotel is the perfect destination for those who love shopping. The hotel offers comfortable, spacious rooms with easy access to local boutiques, restaurants, and entertainment venues. located near top shopping destinations and attractions.",
+        "Nestled in the lively city Galle, the Cozy Shopping Hub Hotel is the perfect destination for those who love shopping. The hotel offers comfortable, spacious rooms with easy access to local boutiques, restaurants, and entertainment venues. located near top shopping destinations and attractions.",
       facilities: "Free Breakfast, Gym Access",
       rules: "No loud music after 10 PM",
       price: "$150 per night",
